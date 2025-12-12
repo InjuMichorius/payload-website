@@ -1,8 +1,11 @@
 import type { Metadata } from 'next'
 
 import { cn } from '@/utilities/ui'
-import { GeistMono } from 'geist/font/mono'
-import { GeistSans } from 'geist/font/sans'
+import { Anton, Poppins, Antonio } from 'next/font/google'
+
+const anton = Anton({ subsets: ['latin'], weight: '400', variable: '--font-anton' })
+const poppins = Poppins({ subsets: ['latin'], weight: ['400', '700'], variable: '--font-poppins' })
+const antonio = Antonio({ subsets: ['latin'], weight: ['400', '700'], variable: '--font-antonio' })
 import React from 'react'
 
 import { AdminBar } from '@/components/AdminBar'
@@ -20,7 +23,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const { isEnabled } = await draftMode()
 
   return (
-    <html className={cn(GeistSans.variable, GeistMono.variable)} lang="en" suppressHydrationWarning>
+    <html
+      className={cn(anton.variable, poppins.variable, antonio.variable)}
+      lang="en"
+      suppressHydrationWarning
+    >
       <head>
         <InitTheme />
         <link href="/favicon.ico" rel="icon" sizes="32x32" />

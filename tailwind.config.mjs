@@ -94,8 +94,9 @@ const config = {
         warning: 'hsl(var(--warning))',
       },
       fontFamily: {
-        mono: ['var(--font-geist-mono)'],
-        sans: ['var(--font-geist-sans)'],
+        anton: ['var(--font-anton)'],
+        poppins: ['var(--font-poppins)'],
+        antonio: ['var(--font-antonio)'],
       },
       keyframes: {
         'accordion-down': {
@@ -124,7 +125,7 @@ const config = {
           css: [
             {
               h1: {
-                fontSize: '2.5rem',
+                fontSize: '3rem',
               },
               h2: {
                 fontSize: '1.25rem',

@@ -11,6 +11,11 @@
   h6 {
     font-size: unset;
     font-weight: unset;
+    font-family: var(--font-anton);
+  }
+
+  p {
+    font-family: var(--font-poppins);
   }
 
   :root {

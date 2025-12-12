@@ -21,8 +21,8 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
       data-theme="dark"
     >
       <div className="container mb-8 z-10 relative flex items-center justify-start">
-        <div className="max-w-[36.5rem]">
-          {richText && <RichText className="mb-6" data={richText} enableGutter={false} />}
+        <div className="max-w-[32rem]">
+          {richText && <RichText className="mb-16" data={richText} enableGutter={false} />}
           {Array.isArray(links) && links.length > 0 && (
             <ul className="flex md:justify-start gap-4">
               {links.map(({ link }, i) => {
@@ -40,6 +40,16 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
         {media && typeof media === 'object' && (
           <Media fill imgClassName="-z-10 object-cover" priority resource={media} />
         )}
+      </div>
+      <div className="absolute inset-0 bg-black/60"></div>
+      <div className="absolute bottom-[-3rem] w-full grid grid-rows-3 auto-cols-[32px] grid-flow-col gap-0 select-none">
+        {Array.from({ length: 100 }).map((_, i) => (
+          <React.Fragment key={i}>
+            <div className={`w-[2rem] h-[2rem] ${i % 2 === 0 ? 'bg-white' : 'bg-black'}`}></div>
+            <div className={`w-[2rem] h-[2rem] ${i % 2 === 0 ? 'bg-black' : 'bg-white'}`}></div>
+            <div className={`w-[2rem] h-[2rem] ${i % 2 === 0 ? 'bg-white' : 'bg-black'}`}></div>
+          </React.Fragment>
+        ))}
       </div>
     </div>
   )
