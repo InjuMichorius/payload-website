@@ -219,7 +219,7 @@ export interface Page {
           | null;
         id?: string | null;
         blockName?: string | null;
-        blockType: 'imageTextBlock';
+        blockType: 'ImageTextBlock';
       }
   )[];
   meta?: {
@@ -1108,7 +1108,7 @@ export interface PagesSelect<T extends boolean = true> {
         mediaBlock?: T | MediaBlockSelect<T>;
         archive?: T | ArchiveBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
-        imageTextBlock?:
+        ImageTextBlock?:
           | T
           | {
               image?: T;
