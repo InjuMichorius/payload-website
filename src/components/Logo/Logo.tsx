@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import clsx from 'clsx'
 import React from 'react'
 
@@ -11,19 +12,17 @@ export const Logo = (props: Props) => {
   const { loading: loadingFromProps, priority: priorityFromProps, className } = props
 
   const loading = loadingFromProps || 'lazy'
-  const priority = priorityFromProps || 'low'
+  const priority = priorityFromProps === 'high' ? true : false
 
   return (
-    /* eslint-disable @next/next/no-img-element */
-    <img
+    <Image
+      src="/media/logo.svg"
       alt="Payload Logo"
       width={193}
       height={34}
+      priority={priority}
       loading={loading}
-      fetchPriority={priority}
-      decoding="async"
       className={clsx('max-w-[9.375rem] w-full h-[34px]', className)}
-      src="/media/logo.svg"
     />
   )
 }
