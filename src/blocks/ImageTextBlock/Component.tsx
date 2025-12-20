@@ -2,15 +2,37 @@ import React from 'react'
 import Image from 'next/image'
 import { cn } from '@/utilities/ui'
 
-export const ImageTextBlock: React.FC<any> = (props) => {
-  const { image, title, description, buttons, reverseLayout, className } = props
+interface Button {
+  id?: string
+  label: string
+  url: string
+}
 
+interface ImageTextBlockProps {
+  blockId?: string
+  image?: { url: string } | string
+  title?: string
+  description?: string
+  buttons?: Button[]
+  reverseLayout?: boolean
+  className?: string
+}
+
+export const ImageTextBlock: React.FC<ImageTextBlockProps> = ({
+  blockId,
+  image,
+  title,
+  description,
+  buttons,
+  reverseLayout,
+  className,
+}) => {
   const imageUrl = typeof image === 'string' ? image : image?.url
 
   if (!imageUrl && !title && !description && (!buttons || buttons.length === 0)) return null
 
   return (
-    <div className={cn('mx-auto my-8 w-full', className)}>
+    <div id={blockId || undefined} className={cn('mx-auto my-8 w-full', className)}>
       <div
         className={cn(
           'flex flex-col md:flex-row gap-6 items-center',
@@ -35,7 +57,7 @@ export const ImageTextBlock: React.FC<any> = (props) => {
           {description && <p className="text-base text-gray-700">{description}</p>}
           {buttons && buttons.length > 0 && (
             <div className="flex flex-wrap gap-2 mt-2">
-              {buttons.map((btn: any) => (
+              {buttons.map((btn: Button) => (
                 <a
                   key={btn.id || btn.label}
                   href={btn.url}

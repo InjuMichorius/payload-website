@@ -14,12 +14,18 @@ export async function Footer() {
 
   return (
     <footer className="relative mt-auto bg-black text-white border-t border-white/10">
-      <div className="absolute top-[-3rem] w-full grid grid-rows-3 auto-cols-[32px] grid-flow-col gap-0 select-none overflow-x-hidden">
+      <div className="absolute top-[-1rem] sm:top-[-4rem] md:top-[-4rem] w-full grid grid-rows-3 auto-cols-[1rem] sm:auto-cols-[1.5rem] md:auto-cols-[2rem] grid-flow-col gap-0 select-none overflow-x-hidden">
         {Array.from({ length: 100 }).map((_, i) => (
           <React.Fragment key={i}>
-            <div className={`w-[2rem] h-[2rem] ${i % 2 === 0 ? 'bg-white' : 'bg-black'}`}></div>
-            <div className={`w-[2rem] h-[2rem] ${i % 2 === 0 ? 'bg-black' : 'bg-white'}`}></div>
-            <div className={`w-[2rem] h-[2rem] ${i % 2 === 0 ? 'bg-white' : 'bg-black'}`}></div>
+            <div
+              className={`w-[1rem] h-[1rem] sm:w-[1.5rem] sm:h-[1.5rem] md:w-[2rem] md:h-[2rem] ${i % 2 === 0 ? 'bg-white' : 'bg-black'}`}
+            ></div>
+            <div
+              className={`w-[1rem] h-[1rem] sm:w-[1.5rem] sm:h-[1.5rem] md:w-[2rem] md:h-[2rem] ${i % 2 === 0 ? 'bg-black' : 'bg-white'}`}
+            ></div>
+            <div
+              className={`w-[1rem] h-[1rem] sm:w-[1.5rem] sm:h-[1.5rem] md:w-[2rem] md:h-[2rem] ${i % 2 === 0 ? 'bg-white' : 'bg-black'}`}
+            ></div>
           </React.Fragment>
         ))}
       </div>
@@ -83,18 +89,22 @@ export async function Footer() {
           <h4 className="text-sm font-semibold tracking-widest uppercase">Contact</h4>
 
           <div className="space-y-4 text-white/70">
-            <div className="flex items-center gap-3">
-              <span className="h-10 w-10 rounded-lg bg-white/10 flex items-center justify-center">
+            <div className="flex items-center gap-3 group cursor-pointer transition-colors duration-200">
+              <span className="h-10 w-10 rounded-lg bg-white/10 flex items-center justify-center transition-colors duration-200 group-hover:bg-white/20">
                 <Mail size={18} />
               </span>
-              <span>ward@garage.nl</span>
+              <span className="transition-colors duration-200 group-hover:text-white">
+                ward@garage.nl
+              </span>
             </div>
 
-            <div className="flex items-center gap-3">
-              <span className="h-10 w-10 rounded-lg bg-white/10 flex items-center justify-center">
+            <div className="flex items-center gap-3 group cursor-pointer transition-colors duration-200">
+              <span className="h-10 w-10 rounded-lg bg-white/10 flex items-center justify-center transition-colors duration-200 group-hover:bg-white/20">
                 <Phone size={18} />
               </span>
-              <span>+31 6 1234 5678</span>
+              <span className="transition-colors duration-200 group-hover:text-white">
+                +31 6 1234 5678
+              </span>
             </div>
           </div>
         </div>

@@ -207,6 +207,10 @@ export interface Page {
     | ArchiveBlock
     | FormBlock
     | {
+        /**
+         * Add a unique ID to reference this block in navigation links.
+         */
+        blockId?: string | null;
         image: string | Media;
         title?: string | null;
         description?: string | null;
@@ -1112,6 +1116,7 @@ export interface PagesSelect<T extends boolean = true> {
         ImageTextBlock?:
           | T
           | {
+              blockId?: T;
               image?: T;
               title?: T;
               description?: T;

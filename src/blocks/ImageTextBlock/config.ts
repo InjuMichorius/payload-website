@@ -8,6 +8,14 @@ export const ImageTextBlock: Block = {
   },
   fields: [
     {
+      name: 'blockId',
+      type: 'text',
+      label: 'Block ID (for linking)',
+      admin: {
+        description: 'Add a unique ID to reference this block in navigation links.',
+      },
+    },
+    {
       name: 'image',
       type: 'upload',
       relationTo: 'media',
