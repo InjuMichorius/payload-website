@@ -9,7 +9,28 @@ import { FormBlock } from '@/blocks/Form/Component'
 import { MediaBlock } from '@/blocks/MediaBlock/Component'
 import { ImageTextBlock } from '@/blocks/ImageTextBlock/Component'
 
-const blockComponents = {
+import type {
+  ArchiveBlock as ArchiveBlockProps,
+  ContentBlock as ContentBlockProps,
+  MediaBlock as MediaBlockProps,
+} from '@/payload-types'
+
+interface BlockBaseProps {
+  disableInnerContainer?: boolean
+}
+
+type ArchiveBlockComponent = React.ComponentType<ArchiveBlockProps & BlockBaseProps>
+type ContentBlockComponent = React.ComponentType<ContentBlockProps & BlockBaseProps>
+type MediaBlockComponent = React.ComponentType<MediaBlockProps & BlockBaseProps>
+// Add other block prop types as needed
+
+type BlockComponent =
+  | ArchiveBlockComponent
+  | ContentBlockComponent
+  | MediaBlockComponent
+  | React.ComponentType<any>
+
+const blockComponents: Record<string, BlockComponent> = {
   archive: ArchiveBlock,
   content: ContentBlock,
   cta: CallToActionBlock,
