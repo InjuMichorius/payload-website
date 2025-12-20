@@ -15,9 +15,23 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
     setHeaderTheme('dark')
   })
 
+  // Helper to check if media is a video
+  const isVideo = (media: any) => media?.mime?.startsWith('video/')
+
+  const getMediaUrl = (media: any) => {
+    if (!media) return ''
+    // check if it's a video
+    if (media.mime?.startsWith('video/')) {
+      // construct full API URL for video
+      return `${window.location.origin}/api/media/file/${encodeURIComponent(media.filename)}`
+    }
+    // fallback: image handled by Media component
+    return ''
+  }
+
   return (
     <div
-      className="relative -mt-[10.4rem] flex items-center justify-center text-white pt-8"
+      className="relative -mt-[10.4rem] flex items-center justify-center text-white pt-8 min-h-[80vh]"
       data-theme="dark"
     >
       <div className="container mb-8 z-10 relative flex items-center justify-start">
@@ -25,32 +39,43 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
           {richText && <RichText className="mb-16" data={richText} enableGutter={false} />}
           {Array.isArray(links) && links.length > 0 && (
             <ul className="flex md:justify-start gap-4">
-              {links.map(({ link }, i) => {
-                return (
-                  <li key={i}>
-                    <CMSLink {...link} />
-                  </li>
-                )
-              })}
+              {links.map(({ link }, i) => (
+                <li key={i}>
+                  <CMSLink {...link} />
+                </li>
+              ))}
             </ul>
           )}
         </div>
       </div>
-      <div className="min-h-[80vh] select-none">
-        {media && typeof media === 'object' && (
-          <Media fill imgClassName="-z-10 object-cover" priority resource={media} />
-        )}
-      </div>
+
+      {media && typeof media === 'object' && (
+        <>
+          {media && typeof media === 'object' && (
+            <>
+              {isVideo(media) ? (
+                <video
+                  className="absolute top-0 left-0 w-full h-full object-cover"
+                  src={getMediaUrl(media)}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                />
+              ) : (
+                <Media
+                  fill
+                  imgClassName="absolute top-0 left-0 object-cover"
+                  priority
+                  resource={media}
+                />
+              )}
+            </>
+          )}
+        </>
+      )}
+
       <div className="absolute inset-0 bg-black/60"></div>
-      <div className="absolute bottom-[-3rem] w-full grid grid-rows-3 auto-cols-[32px] grid-flow-col gap-0 select-none overflow-x-hidden">
-        {Array.from({ length: 100 }).map((_, i) => (
-          <React.Fragment key={i}>
-            <div className={`w-[2rem] h-[2rem] ${i % 2 === 0 ? 'bg-white' : 'bg-black'}`}></div>
-            <div className={`w-[2rem] h-[2rem] ${i % 2 === 0 ? 'bg-black' : 'bg-white'}`}></div>
-            <div className={`w-[2rem] h-[2rem] ${i % 2 === 0 ? 'bg-white' : 'bg-black'}`}></div>
-          </React.Fragment>
-        ))}
-      </div>
     </div>
   )
 }

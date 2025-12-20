@@ -24,13 +24,26 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
       </nav>
 
       {/* MOBILE */}
-      <div className="md:hidden">
+      <div className="md:hidden relative z-50">
+        {/* Hamburger / Cross Button */}
         <button
-          onClick={() => setOpen(true)}
-          aria-label="Open menu"
-          className="relative z-50 text-white"
+          onClick={() => setOpen(!open)}
+          aria-label="Toggle menu"
+          className="relative w-8 h-8 flex items-center justify-center text-white z-50"
         >
-          <Menu size={28} />
+          {/* Stack Menu & X icons */}
+          <Menu
+            size={28}
+            className={`absolute transition-transform duration-300 ease-in-out ${
+              open ? 'rotate-45 scale-0 opacity-0' : 'rotate-0 scale-100 opacity-100'
+            }`}
+          />
+          <X
+            size={28}
+            className={`absolute transition-transform duration-300 ease-in-out ${
+              open ? 'rotate-0 scale-100 opacity-100' : 'rotate-45 scale-0 opacity-0'
+            }`}
+          />
         </button>
 
         {/* BACKDROP */}
@@ -44,17 +57,10 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
         {/* SLIDE-IN MENU */}
         <aside
           className={`fixed top-0 right-0 h-full w-1/2 max-w-sm bg-black border-l border-white/10
-            transform transition-transform duration-500 ease-in-out z-50
+            transform transition-transform duration-500 ease-in-out
             ${open ? 'translate-x-0' : 'translate-x-full'}
           `}
         >
-          {/* Close button */}
-          <div className="flex justify-end py-6 px-4">
-            <button onClick={() => setOpen(false)} aria-label="Close menu" className="text-white">
-              <X size={28} />
-            </button>
-          </div>
-
           {/* Nav items */}
           <nav className="flex flex-col gap-8 px-8 pt-12 text-xl">
             {navItems.map(({ link }, i) => (
@@ -63,7 +69,6 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
                 className="cursor-pointer"
                 onClick={() => {
                   setOpen(false)
-                  // If it's an in-page link, scroll smoothly
                   if (link.url?.startsWith('#')) {
                     const target = document.querySelector(link.url)
                     target?.scrollIntoView({ behavior: 'smooth' })

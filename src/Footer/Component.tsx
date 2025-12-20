@@ -14,6 +14,15 @@ export async function Footer() {
 
   return (
     <footer className="relative mt-auto bg-black text-white border-t border-white/10">
+      <div className="absolute top-[-3rem] w-full grid grid-rows-3 auto-cols-[32px] grid-flow-col gap-0 select-none overflow-x-hidden">
+        {Array.from({ length: 100 }).map((_, i) => (
+          <React.Fragment key={i}>
+            <div className={`w-[2rem] h-[2rem] ${i % 2 === 0 ? 'bg-white' : 'bg-black'}`}></div>
+            <div className={`w-[2rem] h-[2rem] ${i % 2 === 0 ? 'bg-black' : 'bg-white'}`}></div>
+            <div className={`w-[2rem] h-[2rem] ${i % 2 === 0 ? 'bg-white' : 'bg-black'}`}></div>
+          </React.Fragment>
+        ))}
+      </div>
       {/* TOP */}
       <div className="container py-16 grid gap-12 md:grid-cols-3">
         {/* BRAND */}

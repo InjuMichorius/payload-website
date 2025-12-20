@@ -1,10 +1,9 @@
 import React from 'react'
 import Image from 'next/image'
-import RichText from '@/components/RichText'
 import { cn } from '@/utilities/ui'
 
 export const ImageTextBlock: React.FC<any> = (props) => {
-  const { image, title, description, buttons, className } = props
+  const { image, title, description, buttons, reverseLayout, className } = props
 
   const imageUrl = typeof image === 'string' ? image : image?.url
 
@@ -12,7 +11,12 @@ export const ImageTextBlock: React.FC<any> = (props) => {
 
   return (
     <div className={cn('mx-auto my-8 w-full', className)}>
-      <div className="flex flex-col md:flex-row gap-6 items-center">
+      <div
+        className={cn(
+          'flex flex-col md:flex-row gap-6 items-center',
+          reverseLayout && 'md:flex-row-reverse',
+        )}
+      >
         {imageUrl && (
           <div className="w-full md:w-1/2 relative h-64 md:h-80">
             <Image
@@ -28,7 +32,7 @@ export const ImageTextBlock: React.FC<any> = (props) => {
 
         <div className="w-full md:w-1/2 flex flex-col justify-center gap-4">
           {title && <h2 className="text-2xl font-semibold">{title}</h2>}
-          {description && <RichText data={description} enableGutter={false} enableProse={true} />}
+          {description && <p className="text-base text-gray-700">{description}</p>}
           {buttons && buttons.length > 0 && (
             <div className="flex flex-wrap gap-2 mt-2">
               {buttons.map((btn: any) => (

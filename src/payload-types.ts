@@ -217,6 +217,7 @@ export interface Page {
               id?: string | null;
             }[]
           | null;
+        reverseLayout?: boolean | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'ImageTextBlock';
@@ -1121,6 +1122,7 @@ export interface PagesSelect<T extends boolean = true> {
                     url?: T;
                     id?: T;
                   };
+              reverseLayout?: T;
               id?: T;
               blockName?: T;
             };

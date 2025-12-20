@@ -29,5 +29,10 @@ export const ImageTextBlock: Block = {
         { name: 'url', type: 'text', required: true },
       ],
     },
+    {
+      name: 'reverseLayout',
+      type: 'checkbox',
+      label: 'Reverse Layout (image on right)',
+    },
   ],
 }
