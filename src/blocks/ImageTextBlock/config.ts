@@ -3,17 +3,13 @@ import { Block } from 'payload'
 export const ImageTextBlock: Block = {
   slug: 'ImageTextBlock',
   labels: {
-    singular: 'Image & Text',
-    plural: 'Image & Texts',
+    singular: 'Hero Image & Text',
+    plural: 'Hero Image & Texts',
   },
   fields: [
     {
       name: 'blockId',
       type: 'text',
-      label: 'Block ID (for linking)',
-      admin: {
-        description: 'Add a unique ID to reference this block in navigation links.',
-      },
     },
     {
       name: 'image',
@@ -22,12 +18,30 @@ export const ImageTextBlock: Block = {
       required: true,
     },
     {
+      name: 'preTitle',
+      type: 'text',
+      label: 'Pre-title',
+    },
+    {
       name: 'title',
       type: 'text',
+      required: true,
     },
     {
       name: 'description',
       type: 'textarea',
+    },
+    {
+      name: 'features',
+      type: 'array',
+      label: 'Feature bullets',
+      fields: [
+        {
+          name: 'text',
+          type: 'text',
+          required: true,
+        },
+      ],
     },
     {
       name: 'buttons',
@@ -35,12 +49,21 @@ export const ImageTextBlock: Block = {
       fields: [
         { name: 'label', type: 'text', required: true },
         { name: 'url', type: 'text', required: true },
+        {
+          name: 'variant',
+          type: 'select',
+          defaultValue: 'primary',
+          options: [
+            { label: 'Primary', value: 'primary' },
+            { label: 'Secondary', value: 'secondary' },
+          ],
+        },
       ],
     },
     {
       name: 'reverseLayout',
       type: 'checkbox',
-      label: 'Reverse Layout (image on right)',
+      label: 'Image left / text right',
     },
   ],
 }

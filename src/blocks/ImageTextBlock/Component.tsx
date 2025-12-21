@@ -1,11 +1,13 @@
 import React from 'react'
 import Image from 'next/image'
 import { cn } from '@/utilities/ui'
+import { Check } from 'lucide-react'
 
 interface Button {
   id?: string
   label: string
   url: string
+  variant?: 'primary' | 'secondary'
 }
 
 interface ImageTextBlockProps {
@@ -13,9 +15,11 @@ interface ImageTextBlockProps {
   image?: { url: string } | string
   title?: string
   description?: string
+  features?: string[]
   buttons?: Button[]
   reverseLayout?: boolean
   className?: string
+  preTitle?: string
 }
 
 export const ImageTextBlock: React.FC<ImageTextBlockProps> = ({
@@ -23,45 +27,57 @@ export const ImageTextBlock: React.FC<ImageTextBlockProps> = ({
   image,
   title,
   description,
+  features,
   buttons,
   reverseLayout,
   className,
+  preTitle,
 }) => {
   const imageUrl = typeof image === 'string' ? image : image?.url
 
-  if (!imageUrl && !title && !description && (!buttons || buttons.length === 0)) return null
-
   return (
-    <div id={blockId || undefined} className={cn('mx-auto my-8 w-full', className)}>
-      <div
-        className={cn(
-          'flex flex-col md:flex-row gap-6 items-center',
-          reverseLayout && 'md:flex-row-reverse',
-        )}
-      >
-        {imageUrl && (
-          <div className="w-full md:w-1/2 relative h-64 md:h-80">
-            <Image
-              src={imageUrl}
-              alt={title || ''}
-              fill
-              className="rounded-lg object-cover"
-              sizes="(max-width: 768px) 100vw, 50vw"
-              priority
-            />
-          </div>
-        )}
+    <section id={blockId || undefined} className={cn('container mx-auto scroll-mt-24', className)}>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        {/* TEXT */}
+        <div
+          className={cn(
+            'flex flex-col gap-6 max-w-xl',
+            reverseLayout ? 'lg:order-2' : 'lg:order-1',
+          )}
+        >
+          {preTitle && (
+            <span className="inline-block text-sm font-medium text-gray-500">{preTitle}</span>
+          )}
 
-        <div className="w-full md:w-1/2 flex flex-col justify-center gap-4">
-          {title && <h2 className="text-2xl font-semibold">{title}</h2>}
-          {description && <p className="text-base text-gray-700">{description}</p>}
+          {title && <h1 className="text-4xl lg:text-5xl font-bold leading-tight">{title}</h1>}
+
+          {description && <p className="text-lg text-gray-600">{description}</p>}
+
+          {features && features.length > 0 && (
+            <ul className="flex flex-col gap-3 pt-2">
+              {features.map((feature: any, idx: number) => (
+                <li key={feature.id || idx} className="flex items-center gap-3 text-gray-700">
+                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-100 text-blue-600">
+                    <Check size={16} />
+                  </span>
+                  {feature.text}
+                </li>
+              ))}
+            </ul>
+          )}
+
           {buttons && buttons.length > 0 && (
-            <div className="flex flex-wrap gap-2 mt-2">
-              {buttons.map((btn: Button) => (
+            <div className="flex gap-4 pt-4">
+              {buttons.map((btn) => (
                 <a
                   key={btn.id || btn.label}
                   href={btn.url}
-                  className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+                  className={cn(
+                    'inline-flex items-center justify-center rounded-full px-6 py-3 font-medium transition',
+                    btn.variant === 'secondary'
+                      ? 'border border-gray-300 text-gray-800 hover:bg-gray-100'
+                      : 'bg-black text-white hover:bg-gray-800',
+                  )}
                 >
                   {btn.label}
                 </a>
@@ -69,8 +85,27 @@ export const ImageTextBlock: React.FC<ImageTextBlockProps> = ({
             </div>
           )}
         </div>
+
+        {/* IMAGE */}
+        {imageUrl && (
+          <div
+            className={cn(
+              'relative w-full h-[420px] lg:h-[520px]',
+              reverseLayout ? 'lg:order-1' : 'lg:order-2',
+            )}
+          >
+            <Image
+              src={imageUrl}
+              alt={title || ''}
+              fill
+              className="object-contain drop-shadow-xl"
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              priority
+            />
+          </div>
+        )}
       </div>
-    </div>
+    </section>
   )
 }
 

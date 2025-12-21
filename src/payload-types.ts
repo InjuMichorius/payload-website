@@ -207,17 +207,22 @@ export interface Page {
     | ArchiveBlock
     | FormBlock
     | {
-        /**
-         * Add a unique ID to reference this block in navigation links.
-         */
         blockId?: string | null;
         image: string | Media;
-        title?: string | null;
+        preTitle?: string | null;
+        title: string;
         description?: string | null;
+        features?:
+          | {
+              text: string;
+              id?: string | null;
+            }[]
+          | null;
         buttons?:
           | {
               label: string;
               url: string;
+              variant?: ('primary' | 'secondary') | null;
               id?: string | null;
             }[]
           | null;
@@ -1118,13 +1123,21 @@ export interface PagesSelect<T extends boolean = true> {
           | {
               blockId?: T;
               image?: T;
+              preTitle?: T;
               title?: T;
               description?: T;
+              features?:
+                | T
+                | {
+                    text?: T;
+                    id?: T;
+                  };
               buttons?:
                 | T
                 | {
                     label?: T;
                     url?: T;
+                    variant?: T;
                     id?: T;
                   };
               reverseLayout?: T;
