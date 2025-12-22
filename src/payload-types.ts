@@ -233,7 +233,7 @@ export interface Page {
         blockName?: string | null;
         blockType: 'ImageTextBlock';
       }
-    | MotorOverzicht
+    | MotorOverview
   )[];
   meta?: {
     title?: string | null;
@@ -815,9 +815,9 @@ export interface Form {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Motor overzicht".
+ * via the `definition` "MotorOverview".
  */
-export interface MotorOverzicht {
+export interface MotorOverview {
   titel: string;
   tekst?: string | null;
   motoren: (string | Motoren)[];
@@ -1178,7 +1178,7 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        motorOverview?: T | MotorOverzichtSelect<T>;
+        motorOverview?: T | MotorOverviewSelect<T>;
       };
   meta?:
     | T
@@ -1280,14 +1280,14 @@ export interface FormBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Motor overzicht_select".
+ * via the `definition` "MotorOverview_select".
  */
-export interface MotorOverzichtSelect {
-  titel?: boolean;
-  tekst?: boolean;
-  motoren?: boolean;
-  id?: boolean;
-  blockName?: boolean;
+export interface MotorOverviewSelect<T extends boolean = true> {
+  titel?: T;
+  tekst?: T;
+  motoren?: T;
+  id?: T;
+  blockName?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

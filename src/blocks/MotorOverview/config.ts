@@ -2,7 +2,7 @@ import { Block } from 'payload'
 
 export const MotorOverview: Block = {
   slug: 'motorOverview',
-  interfaceName: 'Motor overzicht',
+  interfaceName: 'MotorOverview',
   labels: {
     singular: 'Motor overzicht',
     plural: 'Motor overzichten',
