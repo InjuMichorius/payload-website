@@ -201,6 +201,10 @@ export interface Page {
         }[]
       | null;
     media?: (string | null) | Media;
+    /**
+     * Wordt gebruikt als fallback op mobiel bij video heroes
+     */
+    youtubeUrl?: string | null;
   };
   layout: (
     | CallToActionBlock
@@ -818,6 +822,8 @@ export interface Form {
  * via the `definition` "MotorOverview".
  */
 export interface MotorOverview {
+  blockId?: string | null;
+  preTitle?: string | null;
   titel: string;
   tekst?: string | null;
   motoren: (string | Motoren)[];
@@ -1143,6 +1149,7 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
             };
         media?: T;
+        youtubeUrl?: T;
       };
   layout?:
     | T
@@ -1283,6 +1290,8 @@ export interface FormBlockSelect<T extends boolean = true> {
  * via the `definition` "MotorOverview_select".
  */
 export interface MotorOverviewSelect<T extends boolean = true> {
+  blockId?: T;
+  preTitle?: T;
   titel?: T;
   tekst?: T;
   motoren?: T;

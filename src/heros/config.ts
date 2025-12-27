@@ -52,6 +52,27 @@ export const hero: Field = {
         condition: (_, { type } = {}) => ['highImpact', 'mediumImpact'].includes(type),
       },
     },
+
+    {
+      name: 'youtubeUrl',
+      label: 'YouTube URL',
+      type: 'text',
+      admin: {
+        placeholder: 'https://www.youtube.com/watch?v=…',
+        description: 'Wordt gebruikt als fallback op mobiel bij video heroes',
+        condition: (_, { type } = {}) => type === 'highImpact',
+      },
+      validate: (value: unknown) => {
+        if (!value) return true
+        if (
+          typeof value === 'string' &&
+          (value.includes('youtube.com') || value.includes('youtu.be'))
+        ) {
+          return true
+        }
+        return 'Vul een geldige YouTube URL in'
+      },
+    },
   ],
   label: false,
 }

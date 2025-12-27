@@ -94,7 +94,7 @@ export async function Footer() {
                 <Mail size={18} />
               </span>
               <span className="transition-colors duration-200 group-hover:text-white">
-                ward@garage.nl
+                info@brakesandchains.com
               </span>
             </div>
 

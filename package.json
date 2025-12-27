@@ -1,7 +1,7 @@
 {
-  "name": "payload-website",
+  "name": "brakes-and-chains-website",
   "version": "1.0.0",
-  "description": "Website template for Payload",
+  "description": "Payload/Next.js website for Brakes and Chains, a website that sells motorcycles, parts and accessories",
   "license": "MIT",
   "type": "module",
   "scripts": {

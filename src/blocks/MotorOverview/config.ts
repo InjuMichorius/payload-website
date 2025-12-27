@@ -9,6 +9,15 @@ export const MotorOverview: Block = {
   },
   fields: [
     {
+      name: 'blockId',
+      type: 'text',
+    },
+    {
+      name: 'preTitle',
+      type: 'text',
+      label: 'Pre-title',
+    },
+    {
       name: 'titel',
       type: 'text',
       required: true,

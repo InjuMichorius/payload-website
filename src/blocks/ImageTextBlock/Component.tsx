@@ -10,12 +10,17 @@ interface Button {
   variant?: 'primary' | 'secondary'
 }
 
+interface Feature {
+  id?: string | number
+  text: string
+}
+
 interface ImageTextBlockProps {
   blockId?: string
   image?: { url: string } | string
   title?: string
   description?: string
-  features?: string[]
+  features?: Feature[]
   buttons?: Button[]
   reverseLayout?: boolean
   className?: string
@@ -55,7 +60,7 @@ export const ImageTextBlock: React.FC<ImageTextBlockProps> = ({
 
           {features && features.length > 0 && (
             <ul className="flex flex-col gap-3 pt-2">
-              {features.map((feature: any, idx: number) => (
+              {features.map((feature, idx) => (
                 <li key={feature.id || idx} className="flex items-center gap-3 text-gray-700">
                   <span className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-100 text-blue-600">
                     <Check size={16} />

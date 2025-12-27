@@ -20,14 +20,25 @@ interface Props {
   tekst?: string
   motoren: Motor[]
   className?: string
+  preTitle?: string
 }
 
-export const MotorOverview: React.FC<Props> = ({ blockId, titel, tekst, motoren, className }) => {
+export const MotorOverview: React.FC<Props> = ({
+  blockId,
+  titel,
+  tekst,
+  motoren,
+  className,
+  preTitle,
+}) => {
   if (!motoren?.length) return null
 
   return (
     <section id={blockId} className={cn('container mx-auto py-16 px-4', className)}>
       <div className="mb-12">
+        {preTitle && (
+          <span className="inline-block text-sm font-medium text-gray-500">{preTitle}</span>
+        )}
         <h2 className="text-4xl font-bold mb-4 uppercase tracking-tight">{titel}</h2>
         {tekst && <p className="text-lg text-gray-600 max-w-2xl">{tekst}</p>}
       </div>
@@ -51,9 +62,9 @@ export const MotorOverview: React.FC<Props> = ({ blockId, titel, tekst, motoren,
             </div>
 
             {/* Header Sectie (Altijd zichtbaar) */}
-            <div className="p-5 flex justify-between items-start border-b border-gray-100 bg-white z-10">
+            <div className="p-5 flex items-start border-b border-gray-100 bg-white z-10">
               <div>
-                <h3 className="text-xl font-bold uppercase leading-tight">{motor.naam}</h3>
+                <h3 className="text-l font-bold uppercase leading-tight">{motor.naam}</h3>
                 {motor.specstekst && (
                   <p className="text-sm text-gray-400 mt-1 font-medium">{motor.specstekst}</p>
                 )}
@@ -66,7 +77,7 @@ export const MotorOverview: React.FC<Props> = ({ blockId, titel, tekst, motoren,
               className={cn(
                 'p-5 bg-white flex-grow flex flex-col justify-between transition-all duration-300 ease-in-out',
                 // Desktop hover effecten:
-                'md:absolute md:inset-x-0 md:bottom-0 md:h-full md:translate-y-full md:group-hover:translate-y-0 md:z-20 md:border-t md:border-gray-200',
+                'md:absolute md:inset-x-0 md:bottom-0 md:h-full md:translate-y-full md:group-hover:translate-y-0 md:z-10 md:border-t md:border-gray-200',
               )}
             >
               {/* Herhaal titel/prijs in de overlay voor de desktop state uit je screenshot */}
